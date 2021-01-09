@@ -1,0 +1,1 @@
+Hello, I'm a demo file located in 'public/sample.txt' folder.
