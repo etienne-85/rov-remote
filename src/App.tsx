@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, useLocation, Route } from "react-router-dom";
 import Tool from "./Tool";
 import "./App.css";
+import RovRemote from "./RemoteControl";
+import RovLogo from './rovmower_logo.svg';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -22,7 +24,8 @@ export default () => {
         {/* <Route path="/" component={App} /> */}
         {/* <Switch> */}
         <Route exact path="/">
-          <ProcessArgs />
+          <img src={RovLogo} alt="RovMower Remote Logo" className="Logo"/>
+          <ProcessArgs/>
         </Route>
         {/* <LoadSample sample={sample} /> */}
         {/* <Route exact path="/:sample" component={LoadSample} />
@@ -47,5 +50,5 @@ const ProcessArgs = ({ match }: any) => {
 
   const args = { ...URL_ARGS };
 
-  return <Tool args={args} />;
+  return <RovRemote args={args} />;
 };
