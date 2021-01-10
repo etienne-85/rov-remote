@@ -17,19 +17,21 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "rewire": "^5.0.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:ESP": "npm run build:nosplit && npm run build:cleanhash && cp build/main.js build/main.css data",
-    "build:nosplit": "node ./custom_scripts/build-nosplit-nohash.js",
+    "build:ESP": "yarn run build:nochunk && yarn run ESP:exportBuildFiles",
+    "build:nochunk": "node ./build-nosplit-nohash.js",
     "build:cleanhash": "cd build && mv static/js/*.js main.js && mv static/css/*.css main.css && rm -r static",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy:ESP": "npm run ESP:buildFS && npm run ESP:uploadFS",
     "deploy:PI": "npm run PI:clean && scp -r build pizerow@192.168.43.64:~/rov-remote",
+    "ESP:exportBuildFiles": "cp build/static/js/main*.js ../rov-control-esp/data/main.js && cp build/static/css/*.css ../rov-control-esp/data/main.css",
     "ESP:buildFS": "platformio run --target buildfs --environment esp32doit-devkit-v1",
     "ESP:uploadFS": "platformio run --target uploadfs --environment esp32doit-devkit-v1",
     "PI:clean": "ssh pizerow@192.168.43.64 'rm -rf rov-remote/build'"
